@@ -24,6 +24,9 @@ public class Blackjack {
         goPlay();
     }
 
+    /**
+     * Handles player's choice of wanting to play or not
+     */
     private static void goPlay() {
         //noinspection InfiniteLoopStatement
         while (true) {
@@ -36,6 +39,10 @@ public class Blackjack {
         }
     }
 
+    /**
+     * Either starts the game or exits program
+     * @param pick yes/no choice of player
+     */
     private static void run(String pick) {
 
         if (pick.equals("y")){
@@ -64,6 +71,10 @@ public class Blackjack {
         }
     }
 
+    /**
+     * Handles player's pick during game
+     * @param choice the action that the player picked
+     */
     private static void handleChoice(String choice) {
         switch (choice) {
             case "q":
@@ -85,6 +96,9 @@ public class Blackjack {
         }
     }
 
+    /**
+     * Automates the dealer's turns
+     */
     private static void dealDealerHand() {
 
         System.out.println("Now it's the dealer's turn...");
@@ -111,11 +125,17 @@ public class Blackjack {
 
     }
 
+    /**
+     * Asks for a reset
+     */
     private static void offerReplay() {
         System.out.println("Would you like to play again? y/n");
         goPlay();
     }
 
+    /**
+     * Decide on winner based on hands of either player
+     */
     private static void decideWinner() {
         System.out.println("--------------------------------------");
         System.out.println("You have a hand with " + hand.getNumberOfCards() + " cards, totalling: "
@@ -137,12 +157,18 @@ public class Blackjack {
         offerReplay();
     }
 
+    /**
+     * Prints out current status of the dealer's hand
+     */
     private static void getDealerStatus() {
         System.out.println("Their current hand is: " + dealerHand.getHandCards());
         System.out.println("Their number of cards drawn: " + dealerHand.getNumberOfCards());
         System.out.println("Their hand value: " + dealerHand.getHandValue());
     }
 
+    /**
+     * Prints out current status of the player's hand
+     */
     static void giveStatus() {
         System.out.println("Your current hand is: " + hand.getHandCards());
         System.out.println("Number of cards drawn: " + hand.getNumberOfCards());
@@ -158,6 +184,10 @@ public class Blackjack {
         }
     }
 
+    /**
+     * provides delay
+     * @param ms time in milliseconds
+     */
     static void wait(int ms) {
         try {
             Thread.sleep(ms);
