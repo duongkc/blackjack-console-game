@@ -69,7 +69,7 @@ public class Blackjack {
             case "q":
                 System.out.println("Let's play again sometime, Goodbye!");
                 wait(1000);
-                done = true;
+                System.exit(0);
                 break;
             case "k":
                 System.out.println("You take another card...");
@@ -103,6 +103,7 @@ public class Blackjack {
             System.out.println("--------------------------------------");
             System.out.println("The dealer went bust! You've won!");
             System.out.println("--------------------------------------");
+            wait(1000);
             offerReplay();
         } else {
             dealerHandValue = dealerHand.getHandValue();
@@ -132,6 +133,7 @@ public class Blackjack {
             System.out.println("It's a tie, baby!");
         }
         System.out.println("--------------------------------------");
+        wait(1000);
         offerReplay();
     }
 
@@ -149,6 +151,7 @@ public class Blackjack {
             System.out.println("--------------------------------------");
             wait(1000);
             System.out.println("You went bust! The dealer wins!\n--------------GAME OVER---------------");
+            wait(1000);
             offerReplay();
         } else {
             System.out.println("press k to draw a card, press p to pass, press q to quit game");
