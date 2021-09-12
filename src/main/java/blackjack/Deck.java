@@ -39,7 +39,12 @@ public class Deck {
      * Shuffles deck of cards
      */
     void shuffleDeck() {
-        Collections.shuffle(this.currentDeck);
+        if (currentDeck.size() > 1) {
+            Collections.shuffle(this.currentDeck);
+        }
+        else {
+            System.out.println("Not enough cards left to shuffle.");
+        }
     }
 
 
