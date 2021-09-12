@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 /**
- * Class to
+ * A Deck built of 52 different cards
  *
  * @author Kim Chau Duong
  * @version 1.0
@@ -47,5 +47,14 @@ public class Deck {
         }
     }
 
+    Card deal(){
+        if(currentDeck.size() > 0) {
+            return currentDeck.pop();
+        }
+        else {
+            System.out.println("We've run out of cards!");
+        }
+        return null;
+    }
 
 }
