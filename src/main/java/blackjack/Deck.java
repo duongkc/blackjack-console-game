@@ -53,8 +53,8 @@ public class Deck {
         }
         else {
             System.out.println("We've run out of cards!");
+            return null;
         }
-        return null;
     }
 
 }
