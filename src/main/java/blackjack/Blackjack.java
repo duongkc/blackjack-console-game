@@ -30,7 +30,6 @@ public class Blackjack {
             } else {
                 System.out.println("Please type 'y' or 'n'");
             }
-
         }
     }
 
@@ -39,6 +38,7 @@ public class Blackjack {
         if (pick.equals("y")){
             System.out.println("Shuffling new deck...");
             System.out.println("Handing out cards...");
+            wait(1000);
             hand.addCard(deck.deal());
             dealerHand.addCard(deck.deal());
             hand.addCard(deck.deal());
@@ -51,8 +51,6 @@ public class Blackjack {
                 } else {
                     System.out.println("Please pick give a valid answer ('k' | 'p' | 'q')");
                 }
-
-
             }
         } else {
             System.out.println("Goodbye!");
@@ -63,15 +61,19 @@ public class Blackjack {
         switch (choice) {
             case "q":
                 System.out.println("Let's play again sometime, Goodbye!");
+                wait(1000);
                 done = true;
                 break;
             case "k":
+                System.out.println("You take another card...");
+                wait(1000);
                 hand.addCard(deck.deal());
                 giveStatus();
                 break;
             case "p":
                 playerHandValue = hand.getHandValue();
                 dealDealerHand();
+                decideWinner();
 
         }
     }
@@ -82,18 +84,23 @@ public class Blackjack {
         System.out.println("The dealer reveals their first 2 cards: ");
         getDealerStatus();
         while (dealerHand.getHandValue() < 17) {
-            dealerHand.addCard(deck.deal());
             System.out.println("They take another card...");
+            wait(1000);
+            dealerHand.addCard(deck.deal());
             getDealerStatus();
+            wait(1000);
         }
         if (dealerHand.getHandValue() > 21) {
             System.out.println("The dealer went bust! You've won!");
-            done = true;
+            offerReplay();
         } else {
             dealerHandValue = dealerHand.getHandValue();
-            decideWinner();
         }
 
+    }
+
+    private static void offerReplay() {
+        System.out.println("Would you like to play again? y/n");
     }
 
     private static void decideWinner() {
@@ -111,7 +118,7 @@ public class Blackjack {
         } else if (playerHandValue == dealerHandValue && hand.getNumberOfCards() == dealerHand.getNumberOfCards()){
             System.out.println("It's a tie, baby!");
         }
-        done = true;
+        offerReplay();
     }
 
     private static void getDealerStatus() {
@@ -125,9 +132,19 @@ public class Blackjack {
         System.out.println("Number of cards drawn: " + hand.getNumberOfCards());
         System.out.println("Value of hand: " + hand.getHandValue());
         if (hand.getHandValue() > 21) {
-            System.out.println("You went bust! The dealer wins!\n -----GAME OVER-----");
+            System.out.println("--------------------------------------");
+            wait(100);
+            System.out.println("You went bust! The dealer wins!\n--------------GAME OVER---------------");
         } else {
             System.out.println("press k to draw a card, press p to pass, press q to quit game");
+        }
+    }
+
+    static void wait(int ms) {
+        try {
+            Thread.sleep(ms);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
         }
     }
 }
