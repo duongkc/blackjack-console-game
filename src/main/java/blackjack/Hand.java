@@ -16,6 +16,10 @@ public class Hand {
     int numberOfCards = 0;
     int handValue = 0;
 
+    /**
+     * Adds card to current hand
+     * @param card card with suit and value
+     */
     void addCard(Card card) {
         this.handCards.add(card);
         numberOfCards++;
@@ -23,6 +27,11 @@ public class Hand {
         handValue += cardNumValue;
     }
 
+    /**
+     * Calculates actual value of card
+     * @param value String value of card to be converted to its true value
+     * @return
+     */
     private int calcNumValue(String value) {
         if (value.equals("J") || value.equals("Q") || value.equals("K")) {
             return 10;
