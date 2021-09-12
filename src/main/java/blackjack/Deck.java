@@ -14,7 +14,7 @@ import java.util.Stack;
 public class Deck {
     String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
     String[] values = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-    Stack<Card> currentDeck = new Stack<>();
+    private final Stack<Card> currentDeck = new Stack<>();
     Card topCard;
 
     public Deck() {

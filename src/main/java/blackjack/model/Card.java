@@ -7,8 +7,8 @@ package blackjack.model;
  * @version 1.0
  */
 public class Card {
-    private String suit;
-    private String value;
+    private final String suit;
+    private final String value;
 
     public String getSuit() {
         return suit;
