@@ -15,7 +15,8 @@ public class Blackjack {
 
     public static void main(String[] args) {
         Deck deck = new Deck();
-        Stack<Card> newDeck = deck.createDeck();
-        System.out.println(Arrays.toString(newDeck.toArray()));
+//        deck.createDeck();
+//        deck.shuffleDeck();
+        System.out.println(Arrays.toString(deck.currentDeck.toArray()));
     }
 }

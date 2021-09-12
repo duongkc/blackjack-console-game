@@ -2,6 +2,7 @@ package blackjack;
 
 import blackjack.model.Card;
 
+import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -13,20 +14,28 @@ import java.util.Stack;
 public class Deck {
     String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
     String[] values = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+    Stack<Card> currentDeck = new Stack<>();
 
-    Stack<Card> createDeck() {
-        Stack<Card> deck = new Stack<>();
+    public Deck() {
+        createDeck();
+        shuffleDeck();
+    }
+
+    void createDeck() {
         int deckIndex = 0;
         for (String suit : suits) {
             for (String value : values) {
 //                deck[deckIndex] = new Card(suit, value);
 //                deckIndex++;
-                deck.push(new Card(suit, value));
+                this.currentDeck.push(new Card(suit, value));
             }
-
         }
-
-        return deck;
     }
+
+
+    void shuffleDeck() {
+        Collections.shuffle(this.currentDeck);
+    }
+
 
 }
