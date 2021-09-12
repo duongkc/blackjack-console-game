@@ -36,32 +36,39 @@ public class Hand {
     void addCard(Card card) {
         this.handCards.add(card);
         numberOfCards++;
-        int cardNumValue = calcNumValue(card.getValue());
-        handValue += cardNumValue;
+        calcHandValue();
     }
 
     /**
-     * Calculates actual value of card
-     * @param value String value of card to be converted to its true value
-     * @return calculated card value
+     * Calculates total value of card hand
      */
-    private int calcNumValue(String value) {
-        if (value.equals("J") || value.equals("Q") || value.equals("K")) {
-            return 10;
-        } else if (value.equals("A")) {
-            if (handValue < 11) {
-                return 11;
+    private void calcHandValue() {
+        int valueWithoutAce = 0;
+        int aceCount = 0;
+        for (Card handCard : handCards) {
+            String value = handCard.getValue();
+            if (!"A".equals(value)) {
+                if (value.equals("J") || value.equals("Q") || value.equals("K")) {
+                    valueWithoutAce += 10;
+                } else {
+                    try {
+                        valueWithoutAce += Integer.parseInt(value);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Not a valid card value");
+                    }
+                }
             } else {
-                return 1;
+                aceCount++;
+            }
+        }
+        if (aceCount > 0) {
+            if ((valueWithoutAce + 11 + (aceCount - 1)) <= 21) {
+                handValue = valueWithoutAce + 11 + (aceCount - 1);
+            } else {
+                handValue = valueWithoutAce + aceCount;
             }
         } else {
-            try {
-                return Integer.parseInt(value);
-            }
-            catch (NumberFormatException e) {
-                System.out.println("Not a valid card value");
-                return 0;
-            }
+            handValue = valueWithoutAce;
         }
     }
 }
