@@ -1,10 +1,6 @@
 package blackjack;
 
-import blackjack.model.Card;
-
-import java.util.Arrays;
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * A classic game of blackjack. played solely through console commands.
@@ -15,6 +11,9 @@ import java.util.Stack;
 public class Blackjack {
     static Deck deck = new Deck();
     static Hand hand = new Hand();
+    static Hand dealerHand = new Hand();
+    static int playerHandValue;
+    static int dealerHandValue;
     static boolean done = false;
     static Scanner s = new Scanner(System.in);
 
@@ -28,8 +27,10 @@ public class Blackjack {
             System.out.println("Shuffling new deck...");
             System.out.println("Handing out cards...");
             hand.addCard(deck.deal());
+            dealerHand.addCard(deck.deal());
             hand.addCard(deck.deal());
-            giveStatus(hand);
+            dealerHand.addCard(deck.deal());
+            giveStatus();
             while (!done){
                 String choice = s.nextLine();
                 if (choice.equals("k") || choice.equals("p") || choice.equals("q")) {
@@ -46,21 +47,51 @@ public class Blackjack {
     }
 
     private static void handleChoice(String choice) {
-        if (choice.equals("q")){
-            System.out.println("Let's play again sometime, Goodbye!");
-            done = true;
-        } else if (choice.equals("k")){
-            hand.addCard(deck.deal());
-            giveStatus(hand);
-        } else {
-            ;
+        switch (choice) {
+            case "q":
+                System.out.println("Let's play again sometime, Goodbye!");
+                done = true;
+                break;
+            case "k":
+                hand.addCard(deck.deal());
+                giveStatus();
+                break;
+            case "p":
+                dealDealerHand();
+                playerHandValue = hand.getHandValue();
         }
     }
 
-    static void giveStatus(Hand hand) {
-        System.out.println("Your current hand is: " + hand.handCards);
-        System.out.println("Number of cards drawn: " + hand.numberOfCards);
-        System.out.println("Value of hand: " + hand.handValue);
-        System.out.println("press k to draw a card, press p to pass, press q to quit game");
+    private static void dealDealerHand() {
+
+        System.out.println("Now it's the dealer's turn...");
+        System.out.println("The dealer reveals their first 2 cards: ");
+        getDealerStatus();
+        while (dealerHand.getHandValue() < 17) {
+            System.out.println("They take another card...");
+            getDealerStatus();
+        }
+        if (dealerHand.getHandValue() > 21) {
+            System.out.println("The dealer went bust! You've won!");
+            done = true;
+        }
+
+    }
+
+    private static void getDealerStatus() {
+        System.out.println("Their current hand is: " + dealerHand.getHandCards());
+        System.out.println("Their number of cards drawn: " + dealerHand.getNumberOfCards());
+        System.out.println("Their hand value: " + dealerHand.getHandValue());
+    }
+
+    static void giveStatus() {
+        System.out.println("Your current hand is: " + hand.getHandCards());
+        System.out.println("Number of cards drawn: " + hand.getNumberOfCards());
+        System.out.println("Value of hand: " + hand.getHandValue());
+        if (hand.getHandValue() > 21) {
+            System.out.println("You went bust! The dealer wins!\n -----GAME OVER-----");
+        } else {
+            System.out.println("press k to draw a card, press p to pass, press q to quit game");
+        }
     }
 }
