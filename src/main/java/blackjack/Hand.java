@@ -12,9 +12,22 @@ import java.util.List;
  * @version 1.0
  */
 public class Hand {
-    List<Card> handCards = new ArrayList<>();
-    int numberOfCards = 0;
-    int handValue = 0;
+    private final List<Card> handCards = new ArrayList<>();
+    private int numberOfCards = 0;
+    private int handValue = 0;
+
+    public List<Card> getHandCards() {
+        return handCards;
+    }
+
+    public int getNumberOfCards() {
+        return numberOfCards;
+    }
+
+    public int getHandValue() {
+        return handValue;
+    }
+
 
     /**
      * Adds card to current hand
@@ -30,7 +43,7 @@ public class Hand {
     /**
      * Calculates actual value of card
      * @param value String value of card to be converted to its true value
-     * @return
+     * @return calculated card value
      */
     private int calcNumValue(String value) {
         if (value.equals("J") || value.equals("Q") || value.equals("K")) {
