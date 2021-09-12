@@ -82,6 +82,7 @@ public class Blackjack {
         System.out.println("The dealer reveals their first 2 cards: ");
         getDealerStatus();
         while (dealerHand.getHandValue() < 17) {
+            dealerHand.addCard(deck.deal());
             System.out.println("They take another card...");
             getDealerStatus();
         }
@@ -96,6 +97,7 @@ public class Blackjack {
     }
 
     private static void decideWinner() {
+        System.out.println("--------------------------------------");
         System.out.println("You have a hand with " + hand.getNumberOfCards() + " cards, totalling: "
                 + playerHandValue);
         System.out.println("The dealer has a hand with " + dealerHand.getNumberOfCards() + " cards, totalling: "
