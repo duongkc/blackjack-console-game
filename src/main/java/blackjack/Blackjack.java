@@ -9,9 +9,9 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class Blackjack {
-    static Deck deck = new Deck();
-    static Hand hand = new Hand();
-    static Hand dealerHand = new Hand();
+    static Deck deck;
+    static Hand hand;
+    static Hand dealerHand;
     static int playerHandValue;
     static int dealerHandValue;
     static boolean done = false;
@@ -21,7 +21,10 @@ public class Blackjack {
 
         System.out.println("Welcome to Blackjack!");
         System.out.println("Would you like to play? y/n");
+        goPlay();
+    }
 
+    private static void goPlay() {
         //noinspection InfiniteLoopStatement
         while (true) {
             String pick = s.nextLine();
@@ -38,6 +41,9 @@ public class Blackjack {
         if (pick.equals("y")){
             System.out.println("Shuffling new deck...");
             System.out.println("Handing out cards...");
+            deck = new Deck();
+            hand = new Hand();
+            dealerHand = new Hand();
             wait(1000);
             hand.addCard(deck.deal());
             dealerHand.addCard(deck.deal());
@@ -49,11 +55,12 @@ public class Blackjack {
                 if (choice.equals("k") || choice.equals("p") || choice.equals("q")) {
                     handleChoice(choice);
                 } else {
-                    System.out.println("Please pick give a valid answer ('k' | 'p' | 'q')");
+                    System.out.println("Please provide a valid answer ('k' | 'p' | 'q')");
                 }
             }
         } else {
             System.out.println("Goodbye!");
+            System.exit(0);
         }
     }
 
@@ -81,8 +88,10 @@ public class Blackjack {
     private static void dealDealerHand() {
 
         System.out.println("Now it's the dealer's turn...");
+        wait(1000);
         System.out.println("The dealer reveals their first 2 cards: ");
         getDealerStatus();
+        wait(1000);
         while (dealerHand.getHandValue() < 17) {
             System.out.println("They take another card...");
             wait(1000);
@@ -91,7 +100,9 @@ public class Blackjack {
             wait(1000);
         }
         if (dealerHand.getHandValue() > 21) {
+            System.out.println("--------------------------------------");
             System.out.println("The dealer went bust! You've won!");
+            System.out.println("--------------------------------------");
             offerReplay();
         } else {
             dealerHandValue = dealerHand.getHandValue();
@@ -101,6 +112,7 @@ public class Blackjack {
 
     private static void offerReplay() {
         System.out.println("Would you like to play again? y/n");
+        goPlay();
     }
 
     private static void decideWinner() {
@@ -109,6 +121,7 @@ public class Blackjack {
                 + playerHandValue);
         System.out.println("The dealer has a hand with " + dealerHand.getNumberOfCards() + " cards, totalling: "
                 + dealerHandValue);
+        wait(1000);
         if (playerHandValue > dealerHandValue ||
                 (playerHandValue == dealerHandValue && hand.getNumberOfCards() < dealerHand.getNumberOfCards())) {
             System.out.println("You have won! Congratulations!");
@@ -118,6 +131,7 @@ public class Blackjack {
         } else if (playerHandValue == dealerHandValue && hand.getNumberOfCards() == dealerHand.getNumberOfCards()){
             System.out.println("It's a tie, baby!");
         }
+        System.out.println("--------------------------------------");
         offerReplay();
     }
 
@@ -133,8 +147,9 @@ public class Blackjack {
         System.out.println("Value of hand: " + hand.getHandValue());
         if (hand.getHandValue() > 21) {
             System.out.println("--------------------------------------");
-            wait(100);
+            wait(1000);
             System.out.println("You went bust! The dealer wins!\n--------------GAME OVER---------------");
+            offerReplay();
         } else {
             System.out.println("press k to draw a card, press p to pass, press q to quit game");
         }
