@@ -18,7 +18,8 @@ public class Card {
         return value;
     }
 
-    public String getPlayingCard() {
+    @Override
+    public String toString() {
         return value + " of " + suit;
     }
 
