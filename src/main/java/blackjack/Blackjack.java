@@ -18,12 +18,25 @@ public class Blackjack {
     static Scanner s = new Scanner(System.in);
 
     public static void main(String[] args) {
-//        System.out.println(Arrays.toString(deck.currentDeck.toArray()));
 
         System.out.println("Welcome to Blackjack!");
         System.out.println("Would you like to play? y/n");
-        String play = s.nextLine();
-        if (play.equals("y")){
+
+        //noinspection InfiniteLoopStatement
+        while (true) {
+            String pick = s.nextLine();
+            if (pick.equals("y") || pick.equals("n")) {
+                run(pick);
+            } else {
+                System.out.println("Please type 'y' or 'n'");
+            }
+
+        }
+    }
+
+    private static void run(String pick) {
+
+        if (pick.equals("y")){
             System.out.println("Shuffling new deck...");
             System.out.println("Handing out cards...");
             hand.addCard(deck.deal());
@@ -57,8 +70,9 @@ public class Blackjack {
                 giveStatus();
                 break;
             case "p":
-                dealDealerHand();
                 playerHandValue = hand.getHandValue();
+                dealDealerHand();
+
         }
     }
 
@@ -74,8 +88,28 @@ public class Blackjack {
         if (dealerHand.getHandValue() > 21) {
             System.out.println("The dealer went bust! You've won!");
             done = true;
+        } else {
+            dealerHandValue = dealerHand.getHandValue();
+            decideWinner();
         }
 
+    }
+
+    private static void decideWinner() {
+        System.out.println("You have a hand with " + hand.getNumberOfCards() + " cards, totalling: "
+                + playerHandValue);
+        System.out.println("The dealer has a hand with " + dealerHand.getNumberOfCards() + " cards, totalling: "
+                + dealerHandValue);
+        if (playerHandValue > dealerHandValue ||
+                (playerHandValue == dealerHandValue && hand.getNumberOfCards() < dealerHand.getNumberOfCards())) {
+            System.out.println("You have won! Congratulations!");
+        } else if (dealerHandValue > playerHandValue ||
+                (playerHandValue == dealerHandValue && hand.getNumberOfCards() > dealerHand.getNumberOfCards())) {
+            System.out.println("The dealer has won! Better luck next time!");
+        } else if (playerHandValue == dealerHandValue && hand.getNumberOfCards() == dealerHand.getNumberOfCards()){
+            System.out.println("It's a tie, baby!");
+        }
+        done = true;
     }
 
     private static void getDealerStatus() {
