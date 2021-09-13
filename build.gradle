@@ -2,6 +2,15 @@ plugins {
     id 'java'
 }
 
+jar {
+    manifest {
+        attributes "Main-Class": "kcduong.Blackjack"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
 group 'org.example.kcduong'
 version '1.0-SNAPSHOT'
 
