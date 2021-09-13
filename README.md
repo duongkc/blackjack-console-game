@@ -2,7 +2,7 @@
 
 A Java Blackjack game played solely using the command line
 
-####Rules
+### Rules
 - The goal is to beat the dealer's hand without going over 21.
 - Jack, Queen and King are worth 10.
 - Aces are worth 1 or 11, whichever makes a better hand.
