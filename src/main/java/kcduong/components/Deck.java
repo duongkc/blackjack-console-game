@@ -15,7 +15,6 @@ public class Deck {
     String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
     String[] values = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
     private final Stack<Card> currentDeck = new Stack<>();
-    Card topCard;
 
     public Deck() {
         createDeck();
@@ -26,7 +25,6 @@ public class Deck {
      * Creates new deck of cards
      */
     void createDeck() {
-        int deckIndex = 0;
         for (String suit : suits) {
             for (String value : values) {
                 // Puts new card on top of the stack
