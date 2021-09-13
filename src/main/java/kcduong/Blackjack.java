@@ -118,7 +118,7 @@ public class Blackjack {
         }
         if (dealerHand.getHandValue() > 21) {
             System.out.println("--------------------------------------");
-            System.out.println("The dealer went bust! You've won!");
+            System.out.println("The dealer went bust! You win!");
             System.out.println("--------------------------------------");
             wait(1000);
             offerReplay();
@@ -148,10 +148,10 @@ public class Blackjack {
         wait(1000);
         if (playerHandValue > dealerHandValue ||
                 (playerHandValue == dealerHandValue && hand.getNumberOfCards() < dealerHand.getNumberOfCards())) {
-            System.out.println("You have won! Congratulations!");
+            System.out.println("You win! Congratulations!");
         } else if (dealerHandValue > playerHandValue ||
                 (playerHandValue == dealerHandValue && hand.getNumberOfCards() > dealerHand.getNumberOfCards())) {
-            System.out.println("The dealer has won! Better luck next time!");
+            System.out.println("The dealer wins! Better luck next time!");
         } else if (playerHandValue == dealerHandValue && hand.getNumberOfCards() == dealerHand.getNumberOfCards()){
             System.out.println("It's a tie, baby!");
         }
