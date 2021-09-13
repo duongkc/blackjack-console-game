@@ -1,4 +1,4 @@
-package blackjack.model;
+package kcduong.model;
 
 /**
  * Card Model required to build a card deck with playing cards

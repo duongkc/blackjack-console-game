@@ -1,4 +1,7 @@
-package blackjack;
+package kcduong;
+
+import kcduong.components.Deck;
+import kcduong.components.Hand;
 
 import java.util.Scanner;
 

@@ -1,6 +1,6 @@
-package blackjack;
+package kcduong.components;
 
-import blackjack.model.Card;
+import kcduong.model.Card;
 
 import java.util.Collections;
 import java.util.Stack;
@@ -51,7 +51,7 @@ public class Deck {
      * Deals a card that's on top of the deck (stack)
      * @return card popped out of the top of the stack
      */
-    Card deal(){
+    public Card deal(){
         if(currentDeck.size() > 0) {
             return currentDeck.pop();
         }

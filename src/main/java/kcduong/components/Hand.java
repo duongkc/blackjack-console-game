@@ -1,6 +1,6 @@
-package blackjack;
+package kcduong.components;
 
-import blackjack.model.Card;
+import kcduong.model.Card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +33,7 @@ public class Hand {
      * Adds card to current hand
      * @param card card with suit and value
      */
-    void addCard(Card card) {
+    public void addCard(Card card) {
         this.handCards.add(card);
         numberOfCards++;
         calcHandValue();
